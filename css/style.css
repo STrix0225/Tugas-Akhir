@@ -1,0 +1,126 @@
+:root {
+    --gym-dark: #121212;
+    --gym-darker: #0a0a0a;
+    --gym-accent: #C3110C;
+    --gym-accent-hover: #9c0e0a;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.bg-dark-gym {
+    background-color: var(--gym-dark) !important;
+}
+
+.text-accent {
+    color: var(--gym-accent) !important;
+}
+
+.text-accent-dark {
+    color: #9c0e0a !important; 
+}
+
+.border-accent {
+    border: 2px solid var(--gym-accent) !important;
+}
+
+.btn-gym {
+    background-color: var(--gym-accent);
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-gym:hover {
+    background-color: var(--gym-accent-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(195, 17, 12, 0.3);
+}
+
+.hero {
+    height: 400px;
+    background-image: url("../assets/background-gym.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.dashboard-card {
+    transition: 0.3s ease-in-out;
+    border-radius: 12px;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 4px solid var(--gym-accent) !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--gym-accent);
+    box-shadow: 0 0 0 0.25rem rgba(195, 17, 12, 0.25);
+}
+
+footer {
+    border-top: 4px solid var(--gym-accent);
+}
+
+.badge.bg-warning {
+    background-color: var(--gym-accent) !important;
+    color: #ffffff !important;
+}
+
+/* --- Tambahan Dark Mode --- */
+body.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .bg-light {
+    background-color: #2d2d2d !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .card {
+    background-color: #242424 !important;
+    color: #e0e0e0;
+}
+
+body.dark-mode .text-muted {
+    color: #a0a0a0 !important;
+}
+
+body.dark-mode .form-control, 
+body.dark-mode .form-select {
+    background-color: #333 !important;
+    color: #fff !important;
+    border-color: #444;
+}
+
+body.dark-mode .modal-content {
+    background-color: #242424 !important;
+    color: #e0e0e0;
+}
