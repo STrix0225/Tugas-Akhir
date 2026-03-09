@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -20,7 +28,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-3">
+                        <button class="btn btn-outline-light btn-sm" id="btn-theme-toggle">
+                            <i class="bi bi-moon-fill"></i> Tema
+                        </button>
+                    </li>
+                    <li class="nav-item me-3">
+                        <button class="btn btn-gym btn-sm position-relative" id="btn-open-modal" data-bs-toggle="modal" data-bs-target="#wishlistModal">
+                            <i class="bi bi-cart-fill"></i> Keranjang
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="wishlist-badge">0</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout.php" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -70,33 +94,47 @@
         <h3 class="mb-4 fw-bold border-bottom pb-2">Daftar Paket Membership</h3>
         <div class="row">
             <div class="col-md-4">
-                <div class="card mb-4 shadow-sm border-0">
+                <div class="card mb-4 shadow-sm border-0 paket-card">
                     <div class="card-body text-center p-4">
-                        <h5 class="card-title fw-bold text-uppercase">Paket 1 Bulan</h5>
+                        <h5 class="card-title fw-bold text-uppercase item-name">Paket 1 Bulan</h5>
                         <h3 class="text-accent-dark my-3">Rp 350.000</h3>
-                        <p class="card-text text-muted">Akses semua alat berat dan area kardio selama 1 bulan penuh.</p>
-                        <button class="btn btn-gym w-100">Lihat Detail</button>
+                        <p class="card-text text-muted mb-2">Akses semua alat berat dan area kardio selama 1 bulan penuh.</p>
+                        <p class="fw-bold mb-3">Sisa Kuota Promo: <span class="stock-value">15</span></p> 
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gym w-100 btn-buy">Daftar</button>
+                            <button class="btn btn-outline-danger w-100 btn-wishlist" title="Tambah ke Keranjang"><i class="bi bi-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-4">
-                <div class="card mb-4 shadow-sm border-0 position-relative border-accent">
+                <div class="card mb-4 shadow-sm border-0 position-relative border-accent paket-card">
                     <div class="badge bg-warning text-dark position-absolute top-0 start-50 translate-middle px-3 py-2 rounded-pill">Paling Laris</div>
                     <div class="card-body text-center p-4">
-                        <h5 class="card-title fw-bold text-uppercase mt-2">Paket 3 Bulan</h5>
+                        <h5 class="card-title fw-bold text-uppercase mt-2 item-name">Paket 3 Bulan</h5>
                         <h3 class="text-accent-dark my-3">Rp 900.000</h3>
-                        <p class="card-text text-muted">Akses bebas ke semua cabang gym dan gratis 2x sesi Personal Trainer.</p>
-                        <button class="btn btn-gym w-100">Lihat Detail</button>
+                        <p class="card-text text-muted mb-2">Akses bebas ke semua cabang gym dan gratis 2x sesi Personal Trainer.</p>
+                        <p class="fw-bold mb-3">Sisa Kuota Promo: <span class="stock-value">5</span></p> 
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gym w-100 btn-buy">Daftar</button>
+                            <button class="btn btn-outline-danger w-100 btn-wishlist" title="Tambah ke Keranjang"><i class="bi bi-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-4">
-                <div class="card mb-4 shadow-sm border-0">
+                <div class="card mb-4 shadow-sm border-0 paket-card">
                     <div class="card-body text-center p-4">
-                        <h5 class="card-title fw-bold text-uppercase">Paket 6 Bulan</h5>
+                        <h5 class="card-title fw-bold text-uppercase item-name">Paket 6 Bulan</h5>
                         <h3 class="text-accent-dark my-3">Rp 1.500.000</h3>
-                        <p class="card-text text-muted">Akses VIP, gratis loker premium, dan akses semua kelas senam/yoga.</p>
-                        <button class="btn btn-gym w-100">Lihat Detail</button>
+                        <p class="card-text text-muted mb-2">Akses VIP, gratis loker premium, dan akses semua kelas senam/yoga.</p>
+                        <p class="fw-bold mb-3">Sisa Kuota Promo: <span class="stock-value">10</span></p> 
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gym w-100 btn-buy">Daftar</button>
+                            <button class="btn btn-outline-danger w-100 btn-wishlist" title="Tambah ke Keranjang"><i class="bi bi-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,7 +144,7 @@
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card shadow-sm border-0 p-4 p-md-5">
+                <div class="card shadow-sm border-0 p-4 p-md-5 form-card">
                     <h3 class="mb-4 fw-bold">Registrasi Member Baru</h3>
                     <form action="#" method="POST">
                         <div class="row">
@@ -139,6 +177,23 @@
         </div>
     </div>
 
+    <div class="modal fade" id="wishlistModal" tabindex="-1" aria-labelledby="wishlistModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark-gym text-white">
+                    <h5 class="modal-title" id="wishlistModalLabel">Keranjang Paket Gym</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="wishlist-modal-body">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-danger" id="btn-clear-wishlist">Kosongkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-dark-gym text-white text-center py-4 mt-auto">
         <div class="container">
             <p class="mb-0">&copy; 2026 Sisfor Gym. All rights reserved.</p>
@@ -146,5 +201,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script src="js/script.js"></script>
 </body>
 </html>
